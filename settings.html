@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scales Thesaurus - Settings</title>
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="themes.css">
+    <script src="theme-init.js"></script>
+    <style>
+        .settings-container {
+            padding: 30px 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .settings-heading {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            font-size: 2.2em;
+        }
+        .settings-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        .settings-section h2 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        .setting-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .setting-group label {
+            font-weight: 600;
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+        .setting-group select, .setting-group input[type="text"] {
+            width: 250px;
+            max-width: 100%;
+        }
+        .danger-zone {
+            background-color: rgba(231, 76, 60, 0.05);
+            border-color: #e74c3c;
+        }
+        .danger-zone h2 {
+            color: #e74c3c;
+            border-bottom-color: rgba(231, 76, 60, 0.3);
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+        .return-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .return-button:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="top-header-content">
+            <h1 class="main-title" style="margin-right: 15px;">Scales Thesaurus</h1>
+            <nav class="header-nav">
+                <a href="home.html" class="header-link">Home</a>
+                <a href="scales.html" class="header-link">Scales</a>
+                <a href="chords.html" class="header-link">Chords</a>
+                <a href="intervals.html" class="header-link">Intervals</a>
+                <a href="data.html" class="header-link">Data</a>
+                <a href="lessons.html" class="header-link">Lessons</a>
+                <a href="about.html" class="header-link">About</a>
+            </nav>
+            <div class="sidebar-toggle-container">
+                <button id="sidebar-toggle" aria-expanded="false" title="Back to Interactive Fretboard" onclick="window.location.href='index.html'">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="sr-only">Go to App</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="settings-container">
+        <h1 class="settings-heading">Application Settings</h1>
+
+        <div class="settings-section">
+            <h2>Startup Defaults</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-color);">Set the default configuration for when the interactive fretboard loads.</p>
+            
+            <div class="setting-group">
+                <label for="default-instrument">Default Instrument:</label>
+                <select id="default-instrument" class="form-select"></select>
+            </div>
+            <div class="setting-group">
+                <label for="default-key">Default Key:</label>
+                <select id="default-key" class="form-select"></select>
+            </div>
+            <div class="setting-group">
+                <label for="default-display-mode">Default Display Mode:</label>
+                <select id="default-display-mode" class="form-select">
+                    <option value="intervals">Intervals</option>
+                    <option value="notes">Notes</option>
+                    <option value="roman">Roman Numerals</option>
+                    <option value="solfege">Solfège</option>
+                    <option value="none">No Text</option>
+                </select>
+            </div>
+            <div style="text-align: right; margin-top: 15px;">
+                <button id="save-defaults" class="btn-primary" style="padding: 8px 16px; width: auto;">Save Defaults</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Data Management</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-color);">Export or import your custom patterns, favorites, custom fretspan presets, and data editor changes.</p>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button id="export-user-data" class="btn-primary" style="flex: 1; padding: 10px; font-weight: bold;">Export User Data (JSON)</button>
+                <label for="import-user-data" class="btn-primary" style="flex: 1; padding: 10px; text-align: center; cursor: pointer; border-radius: 4px; font-weight: bold; margin-bottom: 0;">Import User Data</label>
+                <input type="file" id="import-user-data" accept=".json" style="display: none;">
+            </div>
+        </div>
+
+        <div class="settings-section danger-zone">
+            <h2>Danger Zone</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9em;">These actions will permanently delete your saved preferences and custom data from local storage.</p>
+            
+            <div class="setting-group">
+                <label>Clear Favorites</label>
+                <button id="clear-favorites" class="btn-danger" style="width: auto; padding: 6px 12px; font-weight: bold;">Clear</button>
+            </div>
+            <div class="setting-group">
+                <label>Reset All Settings & Data</label>
+                <button id="factory-reset" class="btn-danger" style="width: auto; padding: 6px 12px; font-weight: bold;">Factory Reset</button>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="return-button">Explore the Interactive Fretboard</a>
+        </div>
+    </div>
+
+    <!-- Core dependencies to populate settings -->
+    <script src="music-theory-data.js"></script>
+    <script src="instrument-presets.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Populate instruments
+            const instSelect = document.getElementById('default-instrument');
+            if (typeof INSTRUMENT_PRESETS !== 'undefined') {
+                Object.entries(INSTRUMENT_PRESETS).forEach(([id, data]) => {
+                    instSelect.appendChild(new Option(data.name, id));
+                });
+            }
+
+            // Populate keys
+            const keySelect = document.getElementById('default-key');
+            if (typeof MUSIC_THEORY_DATA !== 'undefined' && MUSIC_THEORY_DATA.keySignatures) {
+                Object.keys(MUSIC_THEORY_DATA.keySignatures).forEach(key => {
+                    keySelect.appendChild(new Option(key, key));
+                });
+            } else {
+                ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'F', 'Bb', 'Eb', 'Ab'].forEach(k => {
+                    keySelect.appendChild(new Option(k, k));
+                });
+            }
+
+            // Load current defaults
+            instSelect.value = localStorage.getItem('defaultInstrument') || 'acoustic_guitar';
+            keySelect.value = localStorage.getItem('defaultKey') || 'C';
+            document.getElementById('default-display-mode').value = localStorage.getItem('defaultDisplayMode') || 'intervals';
+
+            // Save defaults
+            document.getElementById('save-defaults').addEventListener('click', () => {
+                localStorage.setItem('defaultInstrument', instSelect.value);
+                localStorage.setItem('defaultKey', keySelect.value);
+                localStorage.setItem('defaultDisplayMode', document.getElementById('default-display-mode').value);
+                
+                const btn = document.getElementById('save-defaults');
+                const orig = btn.textContent;
+                btn.textContent = 'Saved!';
+                btn.style.backgroundColor = 'var(--accent-color)';
+                setTimeout(() => {
+                    btn.textContent = orig;
+                    btn.style.backgroundColor = 'var(--primary-color)';
+                }, 1500);
+            });
+
+            // Factory Reset
+            document.getElementById('factory-reset').addEventListener('click', () => {
+                if (confirm('Are you sure you want to completely reset the application? All custom patterns, edited data, favorites, and settings will be permanently lost.')) {
+                    localStorage.clear();
+                    alert('Application has been reset to factory defaults.');
+                    window.location.reload();
+                }
+            });
+
+            // Clear Favorites
+            document.getElementById('clear-favorites').addEventListener('click', () => {
+                if (confirm('Clear all favorited scales and chords?')) {
+                    localStorage.removeItem('favoriteScales');
+                    localStorage.removeItem('favoriteChords');
+                    alert('Favorites cleared.');
+                }
+            });
+
+            // Export Data
+            document.getElementById('export-user-data').addEventListener('click', () => {
+                const data = {
+                    customPatterns: JSON.parse(localStorage.getItem('customPatterns') || '{}'),
+                    manic_rules_custom_data: JSON.parse(localStorage.getItem('manic_rules_custom_data') || '{}'),
+                    favoriteScales: JSON.parse(localStorage.getItem('favoriteScales') || '{}'),
+                    favoriteChords: JSON.parse(localStorage.getItem('favoriteChords') || '{}'),
+                    fretspanPresets: JSON.parse(localStorage.getItem('fretspanPresets') || '{}')
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'scales_thesaurus_user_data.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+
+            // Import Data
+            document.getElementById('import-user-data').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.customPatterns) localStorage.setItem('customPatterns', JSON.stringify(data.customPatterns));
+                        if (data.manic_rules_custom_data) localStorage.setItem('manic_rules_custom_data', JSON.stringify(data.manic_rules_custom_data));
+                        if (data.favoriteScales) localStorage.setItem('favoriteScales', JSON.stringify(data.favoriteScales));
+                        if (data.favoriteChords) localStorage.setItem('favoriteChords', JSON.stringify(data.favoriteChords));
+                        if (data.fretspanPresets) localStorage.setItem('fretspanPresets', JSON.stringify(data.fretspanPresets));
+                        
+                        alert('User data successfully imported!');
+                        window.location.reload();
+                    } catch (err) {
+                        alert('Failed to parse JSON file: ' + err.message);
+                    }
+                };
+                reader.readAsText(file);
+                e.target.value = '';
+            });
+        });
+    </script>
+</body>
+</html>
